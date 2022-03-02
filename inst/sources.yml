@@ -1,0 +1,23 @@
+version: 2
+# see https://github.com/ssaladino19/dbt-learn-ssaladino/blob/master/models/sources.yml
+sources:
+  - name: shop
+    database: data_lake
+    schema: jaffle_shop
+    tables:
+      - name: orders # data_lake.jaffle_shop.orders -> {{ source('shop', 'orders') }}
+      - name: customers
+
+  - name: stripe
+    database: data_mart
+    schema: stripe_systems
+    tables:
+      - name: payments # data_mart.stripe_systems.orders -> {{ source('stripe', 'payments') }}
+      - name: charges
+      - name: refunds
+
+  - name: tickets
+    database: data_lake
+    schema: ticket_tailor
+    tables:
+      - name: orders # data_lake.ticket_tailor.orders -> {{ source('tickets', 'orders') }}
